@@ -19,20 +19,33 @@ export default class Main extends React.Component {
       inputArray: [],
       inputText: '',
       date: '',
-
+      idEditing: -1,
     }
   }
 
-  addTodo(){
+  saveTodo(){
     if(this.state.inputText){
-      
-        this.state.inputArray.push({
+      const tempList = this.state.inputArray.slice()
+      if(this.state.idEditing === -1) {
+        tempList.push({
           text: this.state.inputText,
           date: this.state.date,
-
+          done: false,
         });
-        this.setState({ inputArray: this.state.inputArray });
-        this.setState({inputText:'', date:''});
+      }
+      else {
+        tempList[this.state.idEditing] = Object.assign({}, tempList[this.state.idEditing], {
+          text: this.state.inputText,
+          date: this.state.date,
+        })
+      }
+      console.log("save", tempList)
+      this.setState({ 
+        inputArray: tempList, 
+        inputText:'', 
+        date:'',
+        idEditing: -1,
+      });
 
     }
   }
@@ -40,21 +53,31 @@ export default class Main extends React.Component {
   deleteMethod(key){
     this.state.inputArray.splice(key, 1);
     this.setState({inputArray: this.state.inputArray});
-}
-editMethod(key){
-	this.setState({
-		inputText: this.state.inputArray[key].Input,
-		date: this.state.inputArray[key].date
-	})
-}
+  }
+  editMethod(key){
+    this.setState({
+      inputText: this.state.inputArray[key].text,
+      date: this.state.inputArray[key].date,
+      idEditing: key,
+    })
+  }
+  changeDoneMethod(key, doneState){
+    const tempList = this.state.inputArray.slice()
+    tempList[key] = Object.assign({}, tempList[key], {done: doneState})
+    this.setState({
+      inputArray: tempList
+    })
+  }
 
   render() {
 
+    console.log("Items", this.state.inputArray)
     let inputs = this.state.inputArray.map((val, key) => {
       return <Input key={"k" + key} 
                     val={val}
-                    deleteMethod={ ()=> this.deleteMethod(key) }
-                    editMethod={ ()=> this.editMethod(key) } />
+                    onDelete={ ()=> this.deleteMethod(key) }
+                    onEdit={ ()=> this.editMethod(key) } 
+                    onChangeDone={ (done) => this.changeDoneMethod(key, done)}/>
                     
     });
 
@@ -68,7 +91,7 @@ editMethod(key){
 
         <ScrollView style={styles.scrollContainer}>
                     {inputs}
-                </ScrollView>
+        </ScrollView>
         <View style={styles.footer}>
 
 
@@ -91,8 +114,8 @@ editMethod(key){
         </View>
 
 
-        <TouchableOpacity onPress={this.addTodo.bind(this)} style={styles.addButton}> 
-          <Text style={styles.addButtonText}> Add </Text>
+        <TouchableOpacity onPress={this.saveTodo.bind(this)} style={styles.addButton}> 
+          <Text style={styles.addButtonText}>{this.state.idEditing === -1 ? "Add" : "Save"}</Text>
         </TouchableOpacity>
 
 
@@ -143,7 +166,7 @@ const styles = StyleSheet.create({
   date:{
     alignSelf: 'stretch',
     padding: 20,
-    backgroundColor: '#252525',
+    backgroundColor: '#FFFFFF',
     borderTopWidth:1,
     borderTopColor: '#ededed',
     position: 'relative',

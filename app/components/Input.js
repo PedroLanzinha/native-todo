@@ -5,69 +5,59 @@ import {
   View,
   TouchableOpacity, 
   CheckBox,
+  TextInput,
 } from 'react-native';
 
 export default class Input extends React.Component {
     	constructor(props){
             super(props)
-            this.state = {
-                isEditing: false,
-                itemCompleted: false,
-            }
-            this.handleDone = this.handleDone.bind(this),
-            this.editMethod = this.editMethod.bind(this)
+            this.handleButtonDone = this.handleButtonDone.bind(this)
+            this.handleEdit = this.handleEdit.bind(this)
+            this.handleDelete = this.handleDelete.bind(this)
 		
 	}
 
-handleDone(){
-	this.setState({
-        itemCompleted: !this.state.itemCompleted
-})
+handleButtonDone(){
+    !this.props.onChangeDone || this.props.onChangeDone(!this.props.val.done)
 }
 	
-editMethod(){
-	if(this.props.isEditing) {
-            this.handleSubmit ()
-        }
-        else {
-            !this.props.onEditing || this.props.onEditing()
-        }
-		
+
+handleEdit () {
+    !this.props.onEdit || this.props.onEdit ()
+}
+handleDelete () {
+    !this.props.onDelete || this.props.onDelete ()
 }
 
+/* onPress() {
+    this.setState({
+        inputText: ""
+    })
+} */ 
 
 
   render() {
      // console.log(this.props.val)
+
     return (
-      <View style={ !this.state.itemCompleted ? styles.itemIncompleted : styles.itemCompleted}>
-        <View style={styles.input}  key={this.props.keyval}> 
+      <View style={ !this.props.val.done ? styles.itemIncompleted : styles.itemCompleted}>
+        <View style={styles.input}> 
 
             <Text style={styles.inputText}> {this.props.val.date} </Text>
             <Text style={styles.inputText}> {this.props.val.text} </Text>
 
-            {this.state.isEditing
-		
-			? <TextInput style={styles.inputText} onChangeText = {this.handleSubmit}>>
-				{this.props.val.input}
-			  </TextInput>
-			:
-			
-			<Text style={styles.inputText}>
-				{this.props.val.input}
-			</Text>
-			}
 
-            <TouchableOpacity onPress={this.props.deleteMethod} style={styles.inputDelete} >
-                <Text style={styles.inputDeleteText} > X </Text>
+            <TouchableOpacity onPress={this.handleDelete} style={styles.inputDelete} >
+                <Text style={styles.inputDeleteText}> X </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={this.props.editMethod} style={styles.inputEdit} >
-                <Text style={styles.inputEditText}>{this.props.isEditing ? "Save" : "Edit"}</Text>
+            <TouchableOpacity onPress={this.handleEdit} style={styles.inputEdit} >
+                <Text style={styles.inputEditText}>Edit</Text>
             </TouchableOpacity>
+            
 
-            <CheckBox onValueChange = {this.handleDone}
-                value = {this.state.itemCompleted}
+            <CheckBox onValueChange={this.handleButtonDone}
+                value = {this.props.val.done}
                 style={styles.checkBox}>
             </CheckBox>
 
