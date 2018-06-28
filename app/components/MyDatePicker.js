@@ -23,7 +23,7 @@ export default class MyDatePicker extends Component {
             marginLeft: 36
           }
         }}
-        showIcon={false}
+        showIcon={true}
         onDateChange={this.props.onChange}
       />
     )

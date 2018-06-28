@@ -10,6 +10,7 @@ import {
 
 import Input from './Input';
 import MyDatePicker from './MyDatePicker'
+import Color from './Color'
 
 export default class Main extends React.Component {
   
@@ -87,13 +88,15 @@ export default class Main extends React.Component {
         <View style={styles.header}>
           <Text style={styles.headerText}> Todo List  </Text>
         </View>
-
-
+ 
+ 
+      <Color>
         <ScrollView style={styles.scrollContainer}>
                     {inputs}
-        </ScrollView>
-        <View style={styles.footer}>
+        </ScrollView>  
+      </Color>
 
+        <View style={styles.footer}>
 
 
           <TextInput 
@@ -104,7 +107,7 @@ export default class Main extends React.Component {
           placeholderTextColor='white'
           underlineColorAndroid='transparent'>
           </TextInput>
-          
+        
           <MyDatePicker
           style={styles.date}
           onChange={(date) => this.setState({date})}
@@ -121,7 +124,7 @@ export default class Main extends React.Component {
 
 
         
-      </View>
+         </View>
     );
   }
 }
