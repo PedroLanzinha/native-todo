@@ -14,7 +14,6 @@ export default class Color extends React.Component {
         this.state = { randomColor: null }
     }
  
-    // function responsible to generate new random color
     getRandomColor = () =>
     {
         return 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
@@ -32,7 +31,6 @@ export default class Color extends React.Component {
         return(
             <View style = { styles.container }>
                 <View style = {[ styles.insiderView, { backgroundColor: this.state.randomColor }]}>
-                    <Text style = { styles.color }></Text>
                 </View>
                 <TouchableOpacity onPress = { this.generateRandomColor } activeOpacity = { 0.8 } style = { styles.button }>
                     <Image source = { require('./images/picker_icon.png') } style = {{ width: '100%', height: '100%', resizeMode: 'contain' }}/>
@@ -53,14 +51,6 @@ insiderView:{
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 15
-},
- 
-color:{
-    position: 'absolute',
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: 'rgba(0,0,0,0.7)',
-    backgroundColor: 'transparent'
 },
  
 button:{
