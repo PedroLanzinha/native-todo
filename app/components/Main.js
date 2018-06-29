@@ -15,6 +15,7 @@ import Styles from './Styles/Styles.js'
 import Input from './Input';
 import MyDatePicker from './MyDatePicker'
 
+
 export default class Main extends React.Component {
   
   constructor(props) {
@@ -74,6 +75,7 @@ export default class Main extends React.Component {
     })
   }
 
+  //Color component foi passado para aqui para funcionar com o add
 
   getRandomColor = () =>
     {
