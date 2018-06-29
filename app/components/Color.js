@@ -2,7 +2,8 @@ import React from 'react';
 import { 
     View,
     TouchableOpacity,
-    Text, StyleSheet,
+    Text,
+    StyleSheet,
     Platform,
     Image, 
     AppRegistry
@@ -48,9 +49,7 @@ container:{
  
 insiderView:{
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
 },
  
 button:{
@@ -63,7 +62,7 @@ button:{
     borderRadius: 50,
     padding: 13,
     borderWidth: 3,
-    borderColor: 'rgba(255,255,255,0.5)'
+    borderColor: 'rgba(255,255,255,0.5)',
 }
 });
  

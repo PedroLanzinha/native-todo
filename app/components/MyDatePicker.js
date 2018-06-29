@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+
 import DatePicker from 'react-native-datepicker'
+import Styles from './Styles/Styles'
 
 export default class MyDatePicker extends Component {
   render(){

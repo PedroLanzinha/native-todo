@@ -8,6 +8,8 @@ import {
   TextInput,
 } from 'react-native';
 
+import Styles from './Styles/Styles.js'
+
 export default class Input extends React.Component {
     	constructor(props){
             super(props)
@@ -66,56 +68,3 @@ handleDelete () {
     );
   }
 }
-
-const styles = StyleSheet.create({
-    input: {
-        position: 'relative',
-        padding: 20,
-        paddingRight: 100,
-        borderBottomWidth:2,
-        borderBottomColor: '#ededed'
-    },
-    inputText: {
-        paddingLeft: 20,
-        borderLeftWidth: 10,
-        borderLeftColor: '#E91E63'
-    },
-
-    inputDelete: {
-        position: 'absolute',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#2980b9',
-        padding: 8,
-        top: 10,
-        bottom: 10,
-        right: 40,
-        height: 50,
-    },
-    inputEdit:{
-        position: 'absolute',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#2980b9',
-        padding: 6,
-        top: 10,
-        bottom: 10,
-        right: 5,
-        height: 50,
-    },
-    inputDeleteText: {
-        color: 'white',
-    },
-    inputEditText:{
-        color: 'white',
-    },
-    checkBox:{
-		position: 'absolute',
-		margin: 'auto',
-        top: 15,
-        left: 150,
-    },
-    itemCompleted:{
-		backgroundColor: 'yellow',
-	},
-});
